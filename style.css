@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.block-a {
+    width: 40vw;
+    padding: 3vw;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.block-b {
+    width: 60vw;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+*::-webkit-scrollbar {
+    width: 15px;
+}
+*::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: hsl(0,0%,67%);
+}

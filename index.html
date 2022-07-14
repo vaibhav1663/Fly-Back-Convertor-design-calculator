@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS only -->
+    <script src="http://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="block-a">
+            <form onsubmit="submitted(); event.preventDefault();">
+                <div class="mb-6">
+                    <label for="input_voltage"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Input Voltage
+                        (V)</label>
+                    <input type="number" id="input_voltage"  step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="24" required value="24">
+                </div>
+                <div class="mb-6">
+                    <label for="output_voltage"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Output Voltage
+                        (V)</label>
+                    <input type="number" id="output_voltage" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="12" required value="12">
+                </div>
+                <div class="mb-6">
+                    <label for="output_current" step="0.0001"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Output Current
+                        (A)</label>
+                    <input type="number" id="output_current"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="3" value="3">
+                </div>
+                <div class="mb-6">
+                    <label for="frequency"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Frequency (kHz)</label>
+                    <input type="number" id="frequency" 
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="200" required value="200">
+                </div>
+                <div class="mb-6">
+                    <label for="s_v_min"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Minimum Supply Voltage (V<sub>cc(min)</sub>)</label>
+                    <input type="number" id="s_v_min" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="21.6" required value="21.6">
+                </div>
+                <div class="mb-6">
+                    <label for="s_v_max"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Minimum Supply Voltage (V<sub>cc(max)</sub>)</label>
+                    <input type="number" id="s_v_max" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="26.4" required value="26.4">
+                </div>
+                <div class="mb-6">
+                    <label for="diode_drop"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Diode Voltage Drop
+                        (%)</label>
+                    <input type="number" id="diode_drop" step="0.01"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="0.75" required value="0.75">
+                </div>
+                <div class="mb-6">
+                    <label for="eff"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Efficency
+                        (E)</label>
+                    <input type="number" id="eff" step="0.01"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="0.98" required value="0.98"> 
+                </div>
+                <div class="mb-6">
+                    <label for="b_m" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Operating
+                        Flux Density (T)</label>
+                    <input type="number" id="b_m" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="0.2" required value="0.2">
+                </div>
+                <div class="mb-6">
+                    <label for="k_u" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Window
+                        Utilization Factor (K<sub>u</sub>)</label>
+                    <input type="number" id="k_u" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="0.4" required value="0.4"> 
+                </div>
+                <div class="mb-6">
+                    <label for="d_max" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Maximum Duty Ratio (D<sub>max</sub>)</label>
+                    <input type="number" id="d_max" step="0.0001"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                        placeholder="0.45" required value="0.45">
+                </div>
+
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Show
+                    Result</button>
+                <button type="reset"
+                    class="text-white bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:focus:ring-blue-800">Reset</button>
+            </form>
+        </div>
+        <div class="block-b">
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg t-info">
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Transformer Information</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Details of the Transformer</p>
+                </div>
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Core Selection</h3>
+                </div>
+                
+                <div class="border-t border-gray-200">
+                    <dl>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Turn Ratio </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="turn_ratio">-</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Minimum Duty ratio (D<sub>min</sub>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="d_min">-</dd>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">&Delta;I<sub>1</sub>(A)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="delta_i1">-</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">&Delta;I<sub>2</sub>(A)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="delta_i2">-</dd>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Transformer Power (P<sub>T</sub>)(W)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="p02">-
+                            </dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Area Product (A<sub>P</sub>)(mm<sup>4</sup>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="a_p">-</dd>
+                        </div>
+
+                    </dl>
+                </div>
+
+
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Winding Selection</h3>
+                </div>
+
+                <div class="border-t border-gray-200">
+                    <dl>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">No. of Primary Turns (N<sub>1</sub>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="n1">-</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">No. of Primary Turns (N<sub>2</sub>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="n2">-</dd>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">I<sub>1</sub>(A)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="i1">-</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">I<sub>2</sub>(A)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="i2">-</dd>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Cross Sectional Area of Primary(A<sub>1</sub>)(mm<sup>2</sup>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="a1">-
+                            </dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Cross Sectional Area of Secondary(A<sub>2</sub>)(mm<sup>2</sup>)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="a2">-</dd>
+                        </div>
+
+                    </dl>
+                </div>
+
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Cross Check</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500" id="cross-check">-</p>
+                </div>
+
+                <div class="px-4 py-5 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Air Gap Length</h3>
+                </div>
+
+                <div class="border-t border-gray-200">
+                    <dl>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Primary Inductance (L<sub>1</sub>)(&micro;H)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="primary_inductance">-</dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Air Gap (L<sub>g</sub>)(mm)</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" id="lg">-</dd>
+                        </div>
+                        
+                    </dl>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
